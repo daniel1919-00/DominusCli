@@ -1,6 +1,6 @@
 # Dominus Cli
 
-![Dominus CLI](/screenshots/dominus_cli.png?raw=true "Dominus CLI")
+![Dominus CLI](screenshots/dominus_cli.png?raw=true "Dominus CLI")
 
 A simple command line tool designed to help you interact with the Dominus API framework, used mostly to generate project files.
 
