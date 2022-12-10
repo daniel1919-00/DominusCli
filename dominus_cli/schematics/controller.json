@@ -1,0 +1,7 @@
+{
+    "type": "file",
+    "name": "{{generatedItemName}}Controller.php",
+    "template": "controller.txt",
+    "destinationPath": "Controllers",
+    "requiredTemplatePlaceholders": []
+}

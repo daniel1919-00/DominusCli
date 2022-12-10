@@ -1,0 +1,13 @@
+<?php
+/**
+ * Created by {{username}}
+ * Date: {{currentDate}}
+ * Time: {{currentTime}}
+{{copyright}}*/
+
+namespace Dominus\Modules\{{moduleName}}\Models;
+
+class {{generatedItemName}}Model
+{
+
+}

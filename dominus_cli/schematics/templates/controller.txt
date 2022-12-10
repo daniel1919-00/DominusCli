@@ -1,0 +1,18 @@
+<?php
+/**
+ * Created by {{username}}
+ * Date: {{currentDate}}
+ * Time: {{currentTime}} 
+{{copyright}}*/
+
+namespace Dominus\Modules\{{moduleName}}\Controllers;
+
+use Dominus\System\Controller;
+use Dominus\System\Attributes\Entrypoint;
+
+// @todo: Specify the controller's entrypoint method
+#[Entrypoint('myMethod')]
+class {{generatedItemName}}Controller extends Controller
+{
+    
+}

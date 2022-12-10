@@ -1,0 +1,27 @@
+__pycache__
+cmd.hist
+usrname
+dominus_cli/tests/
+tests/
+aliases.json
+theme.json
+.DS_Store
+/test.py
+
+
+# IDEs and editors
+.idea/
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+.sublime-workspace
+
+# Visual Studio Code
+.vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history/*

@@ -1,0 +1,24 @@
+<?php
+/**
+ * Created by {{username}}
+ * Date: {{currentDate}}
+ * Time: {{currentTime}}
+{{copyright}}*/
+
+namespace Dominus\Middleware;
+
+use Dominus\System\Middleware;
+use Dominus\System\MiddlewareResolution;
+use Dominus\System\Request;
+
+class {{generatedItemName}}Middleware extends Middleware
+{
+    //@todo: Handle request
+    public function handle(Request $request): MiddlewareResolution
+    {
+        
+
+        //return $this->next();
+        //return $this->reject();
+    }
+}

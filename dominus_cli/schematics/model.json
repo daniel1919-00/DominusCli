@@ -1,0 +1,7 @@
+{
+    "type": "file",
+    "name": "{{generatedItemName}}Model.php",
+    "template": "model.txt",
+    "destinationPath": "Models",
+    "requiredTemplatePlaceholders": []
+}

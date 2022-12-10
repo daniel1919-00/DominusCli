@@ -1,0 +1,7 @@
+{
+    "type": "file",
+    "name": "{{generatedItemName}}Repository.php",
+    "template": "repository.txt",
+    "destinationPath": "Repositories",
+    "requiredTemplatePlaceholders": []
+}

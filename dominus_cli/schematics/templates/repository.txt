@@ -1,0 +1,19 @@
+<?php
+/**
+ * Created by {{username}}
+ * Date: {{currentDate}}
+ * Time: {{currentTime}}
+{{copyright}}*/
+
+namespace Dominus\Modules\{{moduleName}}\Repositories;
+use Dominus\System\Repository;
+
+final class {{generatedItemName}}Repository extends Repository
+{
+    // Example method
+    // public function getItems(): array
+    // {
+    //    $db = $this->getDb();
+    //    return $db->prepare('SELECT item_name FROM items')->execute()->fetchAllFromColumn();
+    // }
+}

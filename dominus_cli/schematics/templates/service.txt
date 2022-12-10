@@ -1,0 +1,27 @@
+<?php
+/**
+ * Created by {{username}}
+ * Date: {{currentDate}}
+ * Time: {{currentTime}}
+{{copyright}}*/
+
+namespace Dominus\Services;
+
+use Dominus\System\Injectable;
+
+class {{generatedItemName}}Service extends Injectable
+{
+    /**
+     * Use this method if this service needs special instantiation. Ex: being instantiated from a static method like DateTime::createFromFormat()
+     * Note that dependency injection is not possible via this method
+     * @return object the class instance to be injected
+     */
+    // public static function _getInjectionInstance()
+    // {
+    // }
+
+    public function __construct()
+    {
+        
+    }
+}

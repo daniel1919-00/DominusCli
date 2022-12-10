@@ -1,0 +1,7 @@
+{
+    "type": "file",
+    "name": "{{generatedItemName}}Service.php",
+    "template": "service.txt",
+    "destinationPath": "Services",
+    "requiredTemplatePlaceholders": []
+}

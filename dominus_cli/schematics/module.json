@@ -1,0 +1,18 @@
+{
+    "type": "dir",
+    "name": "{{generatedItemName}}",
+    "destinationPath": "Modules",
+    "make": [
+        {
+            "type": "dir",
+            "name": "Controllers",
+            "make": [
+                {
+                    "type": "file",
+                    "name": ".gitkeep"
+                }
+            ]
+        }
+    ],
+    "requiredTemplatePlaceholders": []
+}

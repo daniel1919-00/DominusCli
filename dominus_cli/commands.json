@@ -1,0 +1,168 @@
+{
+    "alias": {
+        "pythonModule": "alias",
+        "description": "Creates aliases for command expressions. Usage: alias <alias name> <command>",
+        "aliases": [],
+        "arguments": [
+            {
+                "argument": "--list",
+                "description": "Lists all set aliases."
+            },
+            {
+                "argument": "--remove",
+                "description": "Removes the specified alias. Usage: alias <alias name> --remove"
+            },
+            {
+                "argument": "--rename",
+                "description": "Renames the specified alias. Usage: alias <current alias name> --rename <new alias name>"
+            },
+            {
+                "argument": "--change",
+                "description": "Changes alias properties. Usage: alias <alias name> --change --description <description> --name <name> --command <command>"
+            },
+            {
+                "argument": "--import",
+                "description": "Imports an aliases files. Usage: alias --import <file/path>"
+            },
+            {
+                "argument": "--export",
+                "description": "Exports your currently saved aliases as an importable file. Usage alias --export <file/path>"
+            }
+        ],
+        "examples": [
+            "alias ll ls -la",
+            "alias -l"
+        ]
+    },
+    "cd": {
+        "pythonModule": "cd",
+        "description": "Changes current working dir.",
+        "aliases": [],
+        "arguments": [],
+        "autocomplete": {
+            "pathCompleter": true
+        },
+        "examples": [
+            "cd /schematics"
+        ]
+    },
+    "clear": {
+        "pythonModule": "clearTerminal",
+        "description": "Clears the terminal screen",
+        "aliases": ["cls"],
+        "arguments": [],
+        "examples": []
+    },
+    "exit": {
+        "pythonModule": "exit",
+        "description": "Exists the command line",
+        "aliases": ["stop", "quit"],
+        "arguments": [],
+        "examples": []
+    },
+    "generate": {
+        "pythonModule": "generate",
+        "description": "Generates files based on saved schematics.",
+        "aliases": ["g", "make"],
+        "autocomplete": {
+            "pathCompleter": false
+        },
+        "arguments": [
+            {
+                "argument": "middleware",
+                "description": "Generates a Middleware class. Usage: generate middleware <name>"
+            },
+            {
+                "argument": "service",
+                "description": "Generates an injectable class. Usage: generate service <name>"
+            },
+            {
+                "argument": "module",
+                "description": "Generates a new Module. Usage: generate module <name>"
+            },
+            {
+                "argument": "controller",
+                "description": "Generates a Controller. Usage: generate controller <name>"
+            },
+            {
+                "argument": "repository",
+                "description": "Generates a Repository. Usage: generate repository <name>"
+            },
+            {
+                "argument": "model",
+                "description": "Generates a Model. Usage: generate model <name>"
+            }
+        ],
+        "examples": []
+    },
+    "help":{
+        "pythonModule": "help",
+        "description": "Lists all available commands",
+        "aliases": ["?"],
+        "arguments": [],
+        "examples": []
+    },
+    "ls": {
+        "pythonModule": "ls",
+        "description": "Lists the contents of the current working dir.",
+        "aliases": ["dir", "list"],
+        "arguments": [],
+        "examples": []
+    },
+    "new": {
+        "pythonModule": "new",
+        "description": "Creates a new project",
+        "aliases": [],
+        "arguments": [],
+        "examples": [
+            "new my-first-project"
+        ]
+    },
+    "pwd": {
+        "pythonModule": "pwd",
+        "description": "Prints current path",
+        "aliases": [],
+        "arguments": [],
+        "examples": []
+    },
+    "run": {
+        "pythonModule": "executeCommand",
+        "description": "Forwards commands and arguments to the os shell",
+        "aliases": ["execute", "exec"],
+        "arguments": [],
+        "examples": [
+            "run composer install"
+        ]
+    },
+    "theme": {
+        "pythonModule": "themecmd",
+        "description": "Manages CLI themes",
+        "aliases": [
+            "themes", "color", "colors"
+        ],
+        "arguments": [
+            {
+                "argument": "list",
+                "description": "Lists all available themes"
+            },
+            {
+                "argument": "change",
+                "description": "Select a new theme from list"
+            },
+            {
+                "argument": "set",
+                "description": "Sets a new default theme"
+            }
+        ],
+        "examples": []
+    },
+    "update": {
+        "pythonModule": "update",
+        "description": "Updates the Dominus framework",
+        "aliases": [
+            "up"
+        ],
+        "arguments": [],
+        "examples": []
+    }
+}

@@ -1,0 +1,7 @@
+{
+    "type": "file",
+    "name": "{{generatedItemName}}Middleware.php",
+    "template": "middleware.txt",
+    "destinationPath": "Middleware",
+    "requiredTemplatePlaceholders": []
+}

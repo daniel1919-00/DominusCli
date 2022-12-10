@@ -1,0 +1,13 @@
+{
+    "name": "default",
+    "promptColor": "green",
+    "printInfoColor": "cyan",
+    "printOkColor": "green",
+    "printWarningColor": "yellow",
+    "printErrorColor": "lightred",
+    "printCmdOutputColor": "cyan",
+    "helpHeaderColor": "green",
+    "helpColor": "cyan",
+    "ls_dirColor": "lightblue",
+    "ls_fileColor": "cyan"
+}
