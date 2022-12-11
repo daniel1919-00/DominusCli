@@ -1,5 +1,5 @@
 {
-    "version": "1.8",
+    "version": "1.0.9",
     "maxThreadMessageQueueSize": 20,
     "frameworkRepositoryUrl": "https://github.com/daniel1919-00/DominusApi"
 }
