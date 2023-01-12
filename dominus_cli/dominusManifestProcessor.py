@@ -17,5 +17,5 @@ def processManifest(downloadManifest: dict, projectRootDir: str, frameworkSrc: s
         else:
             shutil.copyfile(srcPath, destPath)
 
-    with open(path.join(projectRootDir, 'version'), "w") as projectVersionFile:
+    with open(path.join(projectRootDir, '.version'), "w") as projectVersionFile:
         projectVersionFile.write(downloadManifest["version"])

@@ -8,7 +8,7 @@ from dominus import DominusCLI
 def run(session: DominusCLI, arguments = []):
     projectDir = getcwd()
     projectTempDir = path.join(projectDir, '_temp')
-    projectVersionFile = path.join(projectDir, 'version')
+    projectVersionFile = path.join(projectDir, '.version')
 
     if path.exists(projectVersionFile):
         currentProjectVersion = Path(projectVersionFile).read_text()
