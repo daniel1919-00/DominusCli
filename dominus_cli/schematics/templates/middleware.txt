@@ -16,9 +16,8 @@ class {{generatedItemName}}Middleware extends Middleware
     //@todo: Handle request
     public function handle(Request $request): MiddlewareResolution
     {
-        
-
-        //return $this->next();
+        // You can get the resolution of the last middleware(if any) using $this->getLastMiddlewareResolution();
+        //return $this->next(); // You can also pass data along the resolution for the next middleware
         //return $this->reject();
     }
 }
