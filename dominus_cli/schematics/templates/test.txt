@@ -1,0 +1,31 @@
+<?php
+/**
+ * Created by {{username}}
+ * Date: {{currentDate}}
+ * Time: {{currentTime}}
+{{copyright}}*/
+
+use Dominus\System\Tests\DominusTest;
+use Dominus\System\Attributes\TestDescription;
+use Dominus\System\Attributes\TestRequestParameters;
+use Dominus\System\Exceptions\TestFailedAssertionException;
+use Dominus\System\Request;
+
+#[TestDescription('My test')] // @todo replace generated test description
+class {{generatedItemName}} extends DominusTest
+{
+    /**
+     * @throws TestFailedAssertionException
+     */
+     #[TestRequestParameters([
+        // @todo set simulated request parameters if required
+        'myParameter' => 'value',
+    ])]
+    #[TestDescription('My test case 1')] // @todo replace generated test case name
+    public function rule_date(
+        Request $request
+    )
+    {
+        $this->assert($request->get('myParameter') === 'value');
+    }
+}

@@ -91,6 +91,10 @@
             {
                 "argument": "model",
                 "description": "Generates a Model. Usage: generate model <name>"
+            },
+            {
+                "argument": "test",
+                "description": "Generates a new Test. Make sure the current working path is in <dominus-project-root>/Tests directory! Usage: generate test <name>"
             }
         ],
         "examples": []

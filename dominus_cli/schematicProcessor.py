@@ -22,9 +22,7 @@ def make(session: DominusCLI, config, templatePlaceholders, templatesPath):
     else:
         templateFile = ''
 
-    if "destinationPathAbsolute" in config:
-        destination = parsePlaceholders(replaceDirSeparatorWithOs(config["destinationPathAbsolute"]), templatePlaceholders)
-    elif "destinationPath" in config:
+    if "destinationPath" in config:
         destPath = parsePlaceholders(replaceDirSeparatorWithOs(config["destinationPath"]), templatePlaceholders)
         if path.basename(path.normpath(destination)) != path.basename(destPath):
             destination = path.join(destination, destPath)
