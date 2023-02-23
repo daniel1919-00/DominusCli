@@ -25,7 +25,7 @@ def run(session: DominusCLI, arguments = []):
     if path.exists(projectTempDir):
         deleteTree(projectTempDir)
 
-    copyDockerConfig = promptInfo("Copy default docker config as well? Y/n: ").strip().lower() == 'y'
+    copyDockerConfig = promptInfo("Copy development docker configuration? Y/n: ").strip().lower() == 'y'
 
     if copyDockerConfig:
         totalInstallationSteps = 4
