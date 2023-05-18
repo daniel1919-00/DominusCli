@@ -29,3 +29,5 @@ class {{generatedItemName}} extends DominusTest
         $this->assert($request->get('myParameter') === 'value');
     }
 }
+
+return new {{generatedItemName}}();
