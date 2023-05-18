@@ -22,7 +22,7 @@ class {{generatedItemName}} extends DominusTest
         'myParameter' => 'value',
     ])]
     #[TestDescription('My test case 1')] // @todo replace generated test case name
-    public function rule_date(
+    public function test_case_1(
         Request $request
     )
     {
