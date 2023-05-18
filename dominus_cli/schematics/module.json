@@ -2,6 +2,7 @@
     "type": "dir",
     "name": "{{generatedItemName}}",
     "nameFirstCharUpper": true,
+    "nameValidCheck": "[^a-zA-Z_0-9]",
     "allowEmptyName": false,
     "destinationPath": "Modules",
     "make": [

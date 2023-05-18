@@ -1,7 +1,7 @@
 {
     "type": "file",
     "name": "{{generatedItemName}}Service.php",
-    "nameValidCheck": "[^a-zA-Z_]",
+    "nameValidCheck": "[^a-zA-Z_0-9]",
     "nameFirstCharUpper": true,
     "allowEmptyName": false,
     "template": "service.txt",
