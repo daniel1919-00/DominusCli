@@ -1,6 +1,9 @@
 {
     "type": "file",
     "name": "{{generatedItemName}}Service.php",
+    "nameValidCheck": "[^a-zA-Z_]",
+    "nameFirstCharUpper": true,
+    "allowEmptyName": false,
     "template": "service.txt",
     "destinationPath": "Services",
     "requiredTemplatePlaceholders": []

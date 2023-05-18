@@ -1,6 +1,9 @@
 {
     "type": "file",
     "name": "{{generatedItemName}}Repository.php",
+    "nameValidCheck": "[^a-zA-Z_]",
+    "nameFirstCharUpper": true,
+    "allowEmptyName": false,
     "template": "repository.txt",
     "destinationPath": "Repositories",
     "requiredTemplatePlaceholders": []

@@ -1,6 +1,9 @@
 {
     "type": "file",
     "name": "{{generatedItemName}}Model.php",
+    "nameValidCheck": "[^a-zA-Z_]",
+    "nameFirstCharUpper": true,
+    "allowEmptyName": false,
     "template": "model.txt",
     "destinationPath": "Models",
     "requiredTemplatePlaceholders": []

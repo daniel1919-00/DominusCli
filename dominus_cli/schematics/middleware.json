@@ -1,6 +1,9 @@
 {
     "type": "file",
     "name": "{{generatedItemName}}Middleware.php",
+    "nameValidCheck": "[^a-zA-Z_]",
+    "nameFirstCharUpper": true,
+    "allowEmptyName": false,
     "template": "middleware.txt",
     "destinationPath": "Middleware",
     "requiredTemplatePlaceholders": []

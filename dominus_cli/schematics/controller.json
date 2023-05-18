@@ -1,6 +1,9 @@
 {
     "type": "file",
     "name": "{{generatedItemName}}Controller.php",
+    "nameValidCheck": "[^a-zA-Z_]",
+    "nameFirstCharUpper": true,
+    "allowEmptyName": false,
     "template": "controller.txt",
     "destinationPath": "Controllers",
     "requiredTemplatePlaceholders": []

@@ -1,6 +1,9 @@
 {
     "type": "file",
     "name": "{{generatedItemName}}.php",
+    "nameValidCheck": "[^a-zA-Z_]",
+    "nameFirstCharUpper": true,
+    "allowEmptyName": false,
     "template": "test.txt",
     "requiredTemplatePlaceholders": []
 }
