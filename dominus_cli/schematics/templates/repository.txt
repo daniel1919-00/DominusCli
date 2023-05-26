@@ -5,7 +5,8 @@
  * Time: {{currentTime}}
 {{copyright}}*/
 
-namespace Dominus\Modules\{{moduleName}}\Repositories;
+namespace {{appNamespace}}\Modules\{{moduleName}}\Repositories;
+
 use Dominus\System\Repository;
 
 final class {{generatedItemName}}Repository extends Repository

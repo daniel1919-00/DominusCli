@@ -5,7 +5,7 @@
  * Time: {{currentTime}} 
 {{copyright}}*/
 
-namespace Dominus\Modules\{{moduleName}}\Controllers;
+namespace {{appNamespace}}\Modules\{{moduleName}}\Controllers;
 
 use Dominus\System\Controller;
 use Dominus\System\Attributes\Entrypoint;

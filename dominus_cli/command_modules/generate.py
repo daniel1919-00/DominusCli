@@ -6,7 +6,8 @@ from commands import Commands
 from common import printError, getUserName, parsePlaceholders, getCopyrightText, printOk
 from schematicProcessor import process
 from dominus import DominusCLI
-from paths import PATH_CLI_ROOT
+from paths import PATH_CLI_ROOT, PATH_DOMINUS_PROJECT_ROOT
+from pathlib import Path
 import re
 
 argList = []
@@ -79,13 +80,29 @@ def run(session: DominusCLI, arguments = []):
 
     currentDateTime = datetime.now()
 
+    appNamespace = 'App'
+    if not path.exists(PATH_CLI_ROOT, '.appNamespace'):
+        if PATH_DOMINUS_PROJECT_ROOT == '' or not path.exists(path.join(PATH_DOMINUS_PROJECT_ROOT, '.env')):
+            userSpecifiedNameSpace = input("Dominus project application namespace not set! Enter one now, or leave empty to use the default: App\\").strip().strip('\\')
+            if userSpecifiedNameSpace != '':
+                appNamespace = userSpecifiedNameSpace
+        else:
+            dominusEnvFile = Path(path.join(PATH_DOMINUS_PROJECT_ROOT, '.env')).read_text()
+            match = re.search(r'APP_NAMESPACE="(.*)"', dominusEnvFile)
+
+            if match:
+                extractedString = match.group(1)
+                if extractedString != '':
+                    appNamespace = extractedString
+
     placeholders = {
         '{{sep}}': dirSep,
         '{{username}}': getUserName(),
         '{{currentDate}}': currentDateTime.strftime("%Y-%m-%d"),
         '{{currentTime}}': currentDateTime.strftime("%H:%M:%S"),
         '{{generatedItemName}}': generatedItemName,
-        '{{moduleName}}': getCurrentModuleName(session)
+        '{{moduleName}}': getCurrentModuleName(session),
+        '{{appNamespace}}': appNamespace
     }
     copyrightText = parsePlaceholders(getCopyrightText(), placeholders)
     if copyrightText != '':

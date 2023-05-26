@@ -5,7 +5,7 @@
  * Time: {{currentTime}}
 {{copyright}}*/
 
-namespace Dominus\Services;
+namespace {{appNamespace}}\Services;
 
 use Dominus\System\Injectable;
 

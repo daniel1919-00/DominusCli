@@ -13,8 +13,12 @@ def run(session: DominusCLI, arguments = []):
     if path.exists(projectVersionFile):
         currentProjectVersion = Path(projectVersionFile).read_text()
     else:
-        printError("Command must be run in a Dominus project directory!")
-        return
+        if not path.exists(projectDir, 'download-manifest.json'):
+            printError("Command must be run in a Dominus project directory!")
+            return
+        else:
+            currentProjectVersion = '0.0.0'
+            Path(projectVersionFile).touch()
 
     totalInstallationSteps = 4
     currentInstallationStep = 1

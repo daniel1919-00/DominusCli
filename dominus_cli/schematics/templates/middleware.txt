@@ -5,7 +5,7 @@
  * Time: {{currentTime}}
 {{copyright}}*/
 
-namespace Dominus\Middleware;
+namespace {{appNamespace}}\Middleware;
 
 use Dominus\System\Middleware;
 use Dominus\System\MiddlewareResolution;
