@@ -92,7 +92,7 @@ def run(session: DominusCLI, arguments = []):
             match = re.search(r'APP_NAMESPACE="(.*)"', dominusEnvFile)
 
             if match:
-                extractedString = match.group(1)
+                extractedString = match.group(1).strip().strip('\\')
                 if extractedString != '':
                     appNamespace = extractedString
         with open(appNamespaceCacheFilePath, "w") as appNamespaceCacheFile:
