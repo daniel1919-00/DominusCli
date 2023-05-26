@@ -81,7 +81,7 @@ def run(session: DominusCLI, arguments = []):
     currentDateTime = datetime.now()
 
     appNamespace = 'App'
-    if not path.exists(PATH_CLI_ROOT, '.appNamespace'):
+    if not path.exists(path.join(PATH_CLI_ROOT, '.appNamespace')):
         if PATH_DOMINUS_PROJECT_ROOT == '' or not path.exists(path.join(PATH_DOMINUS_PROJECT_ROOT, '.env')):
             userSpecifiedNameSpace = input("Dominus project application namespace not set! Enter one now, or leave empty to use the default: App\\").strip().strip('\\')
             if userSpecifiedNameSpace != '':
