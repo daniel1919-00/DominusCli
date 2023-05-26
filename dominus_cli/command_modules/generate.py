@@ -96,7 +96,7 @@ def run(session: DominusCLI, arguments = []):
                 if extractedString != '':
                     appNamespace = extractedString
         with open(appNamespaceCacheFilePath, "w") as appNamespaceCacheFile:
-            appNamespaceCacheFile.write(appNamespaceCacheFilePath)
+            appNamespaceCacheFile.write(appNamespace)
     else:
         appNamespace = Path(appNamespaceCacheFilePath).read_text()
 
