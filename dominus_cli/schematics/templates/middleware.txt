@@ -13,11 +13,18 @@ use Dominus\System\Request;
 
 class {{generatedItemName}}Middleware extends Middleware
 {
-    //@todo: Handle request
-    public function handle(Request $request): MiddlewareResolution
+    /**
+     * Handle the current request.
+     *
+     * @param Request $request
+     * @param mixed $prevMiddlewareRes The data from the middleware that has run before this one.
+     * The value will be NULL if there is no data or this is the first middleware to run.
+     *
+     * @return MiddlewareResolution
+     */
+    public function handle(Request $request, mixed $prevMiddlewareRes): MiddlewareResolution
     {
-        // You can get the resolution of the last middleware(if any) using $this->getLastMiddlewareResolution();
-        //return $this->next(); // You can also pass data along the resolution for the next middleware
-        //return $this->reject();
+        //return $this->next(); // data passed to this function will be passed along to the next middleware if any
+        //return $this->reject(); // Optionally pass a reject reason, it will be logged by the framework
     }
 }
