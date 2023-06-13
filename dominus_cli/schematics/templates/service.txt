@@ -7,9 +7,9 @@
 
 namespace {{appNamespace}}\Services;
 
-use Dominus\System\Injectable;
+use Dominus\System\Interfaces\Injectable\Injectable;
 
-class {{generatedItemName}}Service extends Injectable
+class {{generatedItemName}}Service implements Injectable
 {
     /**
      * Use this method if this service needs special instantiation. Ex: being instantiated from a static method like DateTime::createFromFormat()
@@ -19,9 +19,4 @@ class {{generatedItemName}}Service extends Injectable
     // public static function _getInjectionInstance()
     // {
     // }
-
-    public function __construct()
-    {
-        
-    }
 }
