@@ -11,8 +11,8 @@ def processManifest(downloadManifest: dict, projectRootDir: str, frameworkSrc: s
                 if not path.exists(destPath):        
                     makedirs(destPath)
                     shutil.copytree(srcPath, destPath, dirs_exist_ok=True)
-                elif not path.exists(destPath):
-                    shutil.copyfile(srcPath, destPath)
+            elif not path.exists(destPath):
+                shutil.copyfile(srcPath, destPath)
             continue
 
         if frameworkFile["type"] == "dir":
