@@ -56,6 +56,7 @@ def run(session: DominusCLI, arguments = []):
             printInfo(f'[{currentInstallationStep}/{totalInstallationSteps}] Updating Dominus.')
             currentInstallationStep += 1
             processManifest(manifest, projectDir, projectTempDir, True)
+            
             try:
                 newProjectVersion = Path(projectVersionFile).read_text()
             except:
