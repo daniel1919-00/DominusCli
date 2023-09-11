@@ -1,4 +1,5 @@
 from os import path, makedirs
+from pathlib import Path
 import shutil
 
 def processManifest(downloadManifest: dict, projectRootDir: str, frameworkSrc: str, updateFramework):
@@ -10,7 +11,10 @@ def processManifest(downloadManifest: dict, projectRootDir: str, frameworkSrc: s
             if frameworkFile["type"] == "dir":
                 if not path.exists(destPath):        
                     makedirs(destPath)
-                    shutil.copytree(srcPath, destPath, dirs_exist_ok=True)
+                    if "ignoreContents" in frameworkFile:
+                        Path(path.join(destPath, '.gitkeep')).touch()
+                    else:
+                        shutil.copytree(srcPath, destPath, dirs_exist_ok=True)
             elif not path.exists(destPath):
                 shutil.copyfile(srcPath, destPath)
             continue
