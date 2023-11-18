@@ -1,9 +1,5 @@
 <?php
-/**
- * Created by {{username}}
- * Date: {{currentDate}}
- * Time: {{currentTime}}
-{{copyright}}*/
+{{templateHeader}}
 
 use Dominus\System\Tests\DominusTest;
 use Dominus\System\Attributes\TestDescription;

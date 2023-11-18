@@ -3,7 +3,7 @@ import json
 from os import path, sep as dirSep, linesep, getcwd
 from typing import Dict, List
 from commands import Commands
-from common import printError, getUserName, parsePlaceholders, getCopyrightText, printOk
+from common import printError, getUserName, parsePlaceholders, getCopyrightText, printOk, getConfigParam
 from schematicProcessor import process
 from dominus import DominusCLI
 from paths import PATH_CLI_ROOT, PATH_DOMINUS_PROJECT_ROOT
@@ -77,14 +77,14 @@ def run(session: DominusCLI, arguments = []):
         if path.exists(moduleDest):
             printError(f"A module with the same name exists: {moduleDest}")
             return
-
+        
     currentDateTime = datetime.now()
 
     appNamespaceCacheFilePath = path.join(PATH_CLI_ROOT, '.appNamespace')
     appNamespace = 'App'
     if not path.exists(appNamespaceCacheFilePath):
         if PATH_DOMINUS_PROJECT_ROOT == '' or not path.exists(path.join(PATH_DOMINUS_PROJECT_ROOT, '.env')):
-            userSpecifiedNameSpace = input("Dominus project application namespace not set! Enter one now, or leave empty to use the default: App\\").strip().strip('\\')
+            userSpecifiedNameSpace = input(f"Dominus project application namespace not set! Enter one now, or leave empty to use the default: {appNamespace}\\").strip().strip('\\')
             if userSpecifiedNameSpace != '':
                 appNamespace = userSpecifiedNameSpace
         else:
@@ -95,24 +95,32 @@ def run(session: DominusCLI, arguments = []):
                 extractedString = match.group(1).strip().strip('\\')
                 if extractedString != '':
                     appNamespace = extractedString
+
         with open(appNamespaceCacheFilePath, "w") as appNamespaceCacheFile:
             appNamespaceCacheFile.write(appNamespace)
     else:
-        appNamespace = Path(appNamespaceCacheFilePath).read_text()
+        appNamespace = Path(appNamespaceCacheFilePath).read_text().strip()
+
+    schematicTemplates = path.join(PATH_CLI_ROOT, 'schematics', 'templates')
 
     placeholders = {
         '{{sep}}': dirSep,
+        '{{cliVersion}}': f'v{getConfigParam("version")}',
         '{{username}}': getUserName(),
         '{{currentDate}}': currentDateTime.strftime("%Y-%m-%d"),
         '{{currentTime}}': currentDateTime.strftime("%H:%M:%S"),
+        '{{currentTimestamp}}': currentDateTime.timestamp(),
         '{{generatedItemName}}': generatedItemName,
         '{{moduleName}}': getCurrentModuleName(session),
         '{{appNamespace}}': appNamespace
     }
-    copyrightText = parsePlaceholders(getCopyrightText(), placeholders)
+
+    copyrightText = getCopyrightText().strip()
     if copyrightText != '':
-        copyrightText = f"{linesep}{copyrightText}{linesep}"
+        copyrightText = parsePlaceholders(copyrightText, placeholders)
+    
     placeholders['{{copyright}}'] = copyrightText
+    placeholders['{{templateHeader}}'] = parsePlaceholders(Path(path.join(schematicTemplates, 'template_header.txt')).read_text(), placeholders)
 
     if "requiredTemplatePlaceholders" in schematicConfig and schematicConfig["requiredTemplatePlaceholders"]:
         for requiredPlaceholder in schematicConfig["requiredTemplatePlaceholders"]:
@@ -131,7 +139,7 @@ def run(session: DominusCLI, arguments = []):
             session,
             [schematicConfig],
             placeholders,
-            path.join(PATH_CLI_ROOT, 'schematics', 'templates'))
+            schematicTemplates)
         printOk(f"Successfully generated item [{generatedItemName}] based on [{schematicName}] schematic.")
     except Exception as e:
         printError(e)

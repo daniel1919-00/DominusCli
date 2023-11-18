@@ -1,0 +1,6 @@
+/**
+ * Created by {{username}} using Dominus CLI {{cliVersion}}
+ * Date: {{currentDate}}
+ * Time: {{currentTime}}
+*/
+{{copyright}}

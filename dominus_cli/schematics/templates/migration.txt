@@ -1,0 +1,28 @@
+<?php
+{{templateHeader}}
+
+use Dominus\System\Migration;
+class $fileName extends Migration
+{
+    /**
+    * Apply the migration
+    * @return void
+    */
+    public function up()
+    {
+        // You can use the standard Dominus db connector using a connector config alias from the .env file
+        // or use a custom one
+        $db = \Dominus\Services\Database\Database::getConnection('YOUR_CONNECTION_ALIAS');
+    }
+    
+    /**
+    * Revert the migration
+    * @return void
+    */
+    public function down()
+    {
+        // You can use the standard Dominus db connector using a connector config alias from the .env file
+        // or use a custom one
+        $db = \Dominus\Services\Database\Database::getConnection('YOUR_CONNECTION_ALIAS');
+    }
+}

@@ -1,0 +1,11 @@
+{
+    "type": "file",
+    "name": "{{moduleName}}{{currentTimestamp}}.php",
+    "allowEmptyName": true,
+    "template": "migration.txt",
+    "destinationPath": "Migrations",
+    "requiredTemplatePlaceholders": [
+        "{{moduleName}}",
+        "{{currentTimestamp}}"
+    ]
+}
