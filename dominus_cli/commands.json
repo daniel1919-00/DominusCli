@@ -89,6 +89,10 @@
                 "description": "Generates a Repository. Usage: generate repository <name>"
             },
             {
+                "argument": "migration",
+                "description": "Generates a database migration file. Usage: generate migration"
+            },
+            {
                 "argument": "model",
                 "description": "Generates a Model. Usage: generate model <name>"
             },
