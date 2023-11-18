@@ -61,11 +61,15 @@ def make(session: DominusCLI, config, templatePlaceholders, templatesPath):
 
         if config["type"] == 'file':
             duplicateNameIndex = 0
-            destFilePath = path.join(destination, makeName + makeExtension)
+            destFileName = makeName
+            destFilePath = path.join(destination, destFileName + makeExtension)
             
             while path.exists(destFilePath):
                 duplicateNameIndex = duplicateNameIndex + 1
-                destFilePath = path.join(destination, makeName + duplicateNameIndex + makeExtension)
+                destFileName = makeName + duplicateNameIndex
+                destFilePath = path.join(destination, destFileName + makeExtension)
+
+            templatePlaceholders['{{generatedFileName}}'] = destFileName
 
             with open(destFilePath, "w") as file:
                 fileContents = ''
