@@ -1,4 +1,5 @@
 from datetime import datetime
+from time import time
 import json
 from os import path, sep as dirSep, linesep, getcwd
 from typing import Dict, List
@@ -78,8 +79,6 @@ def run(session: DominusCLI, arguments = []):
             printError(f"A module with the same name exists: {moduleDest}")
             return
         
-    currentDateTime = datetime.now()
-
     appNamespaceCacheFilePath = path.join(PATH_CLI_ROOT, '.appNamespace')
     appNamespace = 'App'
     if not path.exists(appNamespaceCacheFilePath):
@@ -103,13 +102,16 @@ def run(session: DominusCLI, arguments = []):
 
     schematicTemplates = path.join(PATH_CLI_ROOT, 'schematics', 'templates')
 
+    currentDateTime = datetime.now()
+    currentTimestamp = int(time())
+
     placeholders = {
         '{{sep}}': dirSep,
         '{{cliVersion}}': f'v{getConfigParam("version")}',
         '{{username}}': getUserName(),
         '{{currentDate}}': currentDateTime.strftime("%Y-%m-%d"),
         '{{currentTime}}': currentDateTime.strftime("%H:%M:%S"),
-        '{{currentTimestamp}}': str(currentDateTime.timestamp()),
+        '{{currentTimestamp}}': str(currentTimestamp),
         '{{generatedItemName}}': generatedItemName,
         '{{moduleName}}': getCurrentModuleName(session),
         '{{appNamespace}}': appNamespace
