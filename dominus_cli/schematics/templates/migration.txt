@@ -1,8 +1,7 @@
 <?php
 {{templateHeader}}
-
 use Dominus\System\Migration;
-class $fileName extends Migration
+class {{generatedItemName}} extends Migration
 {
     /**
     * Apply the migration
