@@ -1,7 +1,9 @@
 {
     "type": "file",
-    "name": "{{moduleName}}{{currentTimestamp}}.php",
+    "name": "{{moduleName}}{{currentTimestamp}}",
+    "extension": "php",
     "allowEmptyName": true,
+    "overwriteIfExists": false,
     "template": "migration.txt",
     "destinationPath": "Migrations",
     "requiredTemplatePlaceholders": [

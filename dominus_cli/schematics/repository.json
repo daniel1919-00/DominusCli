@@ -1,6 +1,7 @@
 {
     "type": "file",
-    "name": "{{generatedItemName}}Repository.php",
+    "name": "{{generatedItemName}}Repository",
+    "extension": "php",
     "nameValidCheck": "[^a-zA-Z_0-9]",
     "nameFirstCharUpper": true,
     "allowEmptyName": false,

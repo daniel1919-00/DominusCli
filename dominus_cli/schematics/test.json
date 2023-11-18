@@ -1,6 +1,7 @@
 {
     "type": "file",
-    "name": "{{generatedItemName}}.php",
+    "name": "{{generatedItemName}}",
+    "extension": "php",
     "nameValidCheck": "[^a-zA-Z_0-9]",
     "nameFirstCharUpper": true,
     "allowEmptyName": false,

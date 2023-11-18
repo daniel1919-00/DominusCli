@@ -84,7 +84,7 @@ def run(session: DominusCLI, arguments = []):
     appNamespace = 'App'
     if not path.exists(appNamespaceCacheFilePath):
         if PATH_DOMINUS_PROJECT_ROOT == '' or not path.exists(path.join(PATH_DOMINUS_PROJECT_ROOT, '.env')):
-            userSpecifiedNameSpace = input(f"Dominus project application namespace not set! Enter one now, or leave empty to use the default: {appNamespace}\\").strip().strip('\\')
+            userSpecifiedNameSpace = input(f"Dominus project application namespace not set! Enter one now, or leave empty to use the default({appNamespace}\\): ").strip().strip('\\')
             if userSpecifiedNameSpace != '':
                 appNamespace = userSpecifiedNameSpace
         else:
@@ -109,7 +109,7 @@ def run(session: DominusCLI, arguments = []):
         '{{username}}': getUserName(),
         '{{currentDate}}': currentDateTime.strftime("%Y-%m-%d"),
         '{{currentTime}}': currentDateTime.strftime("%H:%M:%S"),
-        '{{currentTimestamp}}': currentDateTime.timestamp(),
+        '{{currentTimestamp}}': str(currentDateTime.timestamp()),
         '{{generatedItemName}}': generatedItemName,
         '{{moduleName}}': getCurrentModuleName(session),
         '{{appNamespace}}': appNamespace

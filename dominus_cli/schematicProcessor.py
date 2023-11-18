@@ -54,8 +54,20 @@ def make(session: DominusCLI, config, templatePlaceholders, templatesPath):
         else:
             makeName = ''
 
+        if "extension" in config:
+            makeExtension = '.' + config["extension"]
+        else:
+            makeExtension = ''
+
         if config["type"] == 'file':
-            with open(path.join(destination, makeName), "w") as file:
+            duplicateNameIndex = 0
+            destFilePath = path.join(destination, makeName + makeExtension)
+            
+            while path.exists(destFilePath):
+                duplicateNameIndex = duplicateNameIndex + 1
+                destFilePath = path.join(destination, makeName + duplicateNameIndex + makeExtension)
+
+            with open(destFilePath, "w") as file:
                 fileContents = ''
 
                 if templateFile:
