@@ -2,7 +2,9 @@
 {{templateHeader}}
 namespace {{appNamespace}}\Modules\{{moduleName}}\Migrations;
 
+use Dominus\Services\Database\Database;
 use Dominus\System\Migration;
+use Exception;
 
 class {{generatedFileName}} extends Migration
 {
@@ -15,7 +17,7 @@ class {{generatedFileName}} extends Migration
     {
         // You can use the standard Dominus db connector using a connector config alias from the .env file
         // or use a custom one
-        $db = \Dominus\Services\Database\Database::getConnection('YOUR_CONNECTION_ALIAS');
+        $db = Database::getConnection('YOUR_CONNECTION_ALIAS');
     }
     
     /**
@@ -27,6 +29,6 @@ class {{generatedFileName}} extends Migration
     {
         // You can use the standard Dominus db connector using a connector config alias from the .env file
         // or use a custom one
-        $db = \Dominus\Services\Database\Database::getConnection('YOUR_CONNECTION_ALIAS');
+        $db = Database::getConnection('YOUR_CONNECTION_ALIAS');
     }
 }
