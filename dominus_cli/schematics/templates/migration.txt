@@ -9,8 +9,9 @@ class {{generatedFileName}} extends Migration
     /**
     * Apply the migration
     * @return void
+    * @throws Exception
     */
-    public function up()
+    public function up(): void
     {
         // You can use the standard Dominus db connector using a connector config alias from the .env file
         // or use a custom one
@@ -20,8 +21,9 @@ class {{generatedFileName}} extends Migration
     /**
     * Revert the migration
     * @return void
+    * @throws Exception
     */
-    public function down()
+    public function down(): void
     {
         // You can use the standard Dominus db connector using a connector config alias from the .env file
         // or use a custom one
