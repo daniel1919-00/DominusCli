@@ -85,6 +85,10 @@
                 "description": "Generates a Controller. Usage: generate controller <name>"
             },
             {
+                "argument": "cli-controller",
+                "description": "Generates a Controller that can only be run from the CLI environment. Usage: generate cli-controller <name>"
+            },
+            {
                 "argument": "repository",
                 "description": "Generates a Repository. Usage: generate repository <name>"
             },

@@ -2,11 +2,13 @@ __pycache__
 cmd.hist
 usrname
 dominus_cli/tests/
+dominus_cli/.appNamespace
 tests/
 aliases.json
 theme.json
 .DS_Store
 /test.py
+
 
 
 # IDEs and editors

@@ -1,0 +1,13 @@
+<?php
+{{templateHeader}}
+
+namespace {{appNamespace}}\Modules\{{moduleName}}\Controllers;
+
+use Dominus\System\CliController;
+use Dominus\System\Attributes\Entrypoint;
+
+#[Entrypoint('myMethod')] // @todo: Specify the controller's entrypoint method
+class {{generatedItemName}}Controller extends CliController
+{
+    
+}
