@@ -13,7 +13,7 @@ def run(session: DominusCLI, arguments = []):
     if path.exists(projectVersionFile):
         currentProjectVersion = Path(projectVersionFile).read_text()
     else:
-        if not path.exists(projectDir, 'download-manifest.json'):
+        if not path.exists(path.join(projectDir, 'download-manifest.json')):
             printError("Command must be run in a Dominus project directory!")
             return
         else:
