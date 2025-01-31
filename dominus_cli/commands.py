@@ -1,22 +1,22 @@
 import json
 from os import path
 from paths import PATH_CLI_ROOT
-import dominusConfig
+from dominusUserConfig import getUserConfig
 
 Commands = {}
 MainCommands = []
 CommandAliasMap = {}
 
-with open(path.join(PATH_CLI_ROOT, 'commands.json')) as commandsFile:
-    storedCommands = json.load(commandsFile)
-    for alias in storedCommands:
-        Commands[alias] = storedCommands[alias]
-
-existingCommands = dominusConfig.getConfig().get('existingAliases')
-for alias in existingCommands:
-    Commands[alias] = existingCommands[alias]  
-
 def constructCommandAliasMap():
+    with open(path.join(PATH_CLI_ROOT, 'commands.json')) as commandsFile:
+        storedCommands = json.load(commandsFile)
+        for alias in storedCommands:
+            Commands[alias] = storedCommands[alias]
+
+    existingCommands = getUserConfig().get('existingAliases')
+    for alias in existingCommands:
+        Commands[alias] = existingCommands[alias]  
+        
     del MainCommands[:]
     sortedCommands = sorted(list(Commands.keys()))
     for command in sortedCommands:
@@ -33,5 +33,3 @@ def getCommandDefinition(command: str):
         return Commands[CommandAliasMap[command]]
     else:
         return None
-    
-constructCommandAliasMap()

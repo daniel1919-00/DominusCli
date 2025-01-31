@@ -10,7 +10,7 @@ from dominus import DominusCLI
 from paths import PATH_CLI_ROOT
 from pathlib import Path
 import re
-from dominusConfig import getConfig
+from dominusUserConfig import getUserConfig
 
 argList = []
 for arg in Commands['generate']['arguments']:
@@ -51,7 +51,7 @@ def run(session: DominusCLI, arguments = []):
         with open(schematicFilePath) as schematicFile:
             schematicConfig = json.load(schematicFile)
 
-            templateExtensionPath = getConfig().get('templateExtensionPath')
+            templateExtensionPath = getUserConfig().get('templateExtensionPath')
             if templateExtensionPath and path.exists(path.join(templateExtensionPath, schematicFileName)):
                 with open(path.join(templateExtensionPath, schematicFileName)) as overriddenSchematicFile:
                     overriddenSchematicData = json.load(overriddenSchematicFile)
@@ -99,7 +99,7 @@ def run(session: DominusCLI, arguments = []):
         '{{currentTimestamp}}': str(int(time())),
         '{{generatedItemName}}': generatedItemName,
         '{{moduleName}}': getCurrentModuleName(session),
-        '{{appNamespace}}': str(getConfig().get('appNamespace'))
+        '{{appNamespace}}': str(getUserConfig().get('appNamespace'))
     }
 
     copyrightText = getCopyrightText().strip()

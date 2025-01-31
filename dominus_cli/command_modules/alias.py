@@ -7,10 +7,10 @@ from tabulate import tabulate
 from datetime import datetime
 from dominus import DominusCLI
 from paths import PATH_CLI_ROOT
-import dominusConfig
+from dominusUserConfig import getUserConfig, updateUserConfig
 
 def run(session: DominusCLI, arguments: List = []):
-    existingAliases = dominusConfig.getConfig().get('existingAliases')
+    existingAliases = getUserConfig().get('existingAliases')
     defaultAliasDesc = True
     newAlias = True
 
@@ -222,6 +222,6 @@ def run(session: DominusCLI, arguments: List = []):
 
         printOk(f"Alias '{alias}' successfully created!")
 
-    dominusConfig.updateConfig(dominusConfig.getConfig())
+    updateUserConfig(getUserConfig())
     
     constructCommandAliasMap()

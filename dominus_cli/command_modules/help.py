@@ -10,8 +10,8 @@ def printHelpAll():
     maxCmdArgLen = 0
     formattedCommands = []
     currentTheme = getCurrentTheme()
-    headerColor = currentTheme.helpHeaderColor
-    normalColor = currentTheme.helpColor
+    headerColor = currentTheme.get('helpHeaderColor')
+    normalColor = currentTheme.get('helpColor')
 
     for mainCommand in Commands:
         cmdDef = Commands[mainCommand]
@@ -72,8 +72,8 @@ def printHelpFor(command: str):
         return
 
     currentTheme = getCurrentTheme()
-    headerColor = currentTheme.helpHeaderColor
-    normalColor = currentTheme.helpColor
+    headerColor = currentTheme.get('helpHeaderColor')
+    normalColor = currentTheme.get('helpColor')
     indent = ' ' * 2
 
     print('')

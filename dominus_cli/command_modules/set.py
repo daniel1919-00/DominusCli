@@ -1,6 +1,6 @@
 from dominus import DominusCLI
 from common import printError, printOk
-import dominusConfig
+from dominusUserConfig import updateUserConfig, updateSavedConfigPath
 from os import path
 
 def run(session: DominusCLI, arguments = []):
@@ -24,7 +24,7 @@ def run(session: DominusCLI, arguments = []):
             printError("Invalid application namespace given!")
             return
 
-        dominusConfig.updateConfig({"appNamespace": appNamespace})
+        updateUserConfig({"appNamespace": appNamespace})
         printOk(f"New application namespace set: {appNamespace}")
         return
     elif setConfiguration == 'template-extension-path':
@@ -34,7 +34,7 @@ def run(session: DominusCLI, arguments = []):
                 printError("Could not access the given templates extension path!")
                 return
             
-            dominusConfig.updateConfig({"templateExtensionPath": templateExtensionPath})
+            updateUserConfig({"templateExtensionPath": templateExtensionPath})
             printOk(f"Templates will be extended using .json files found in this path: {templateExtensionPath}")
         else:
             printError("Invalid template extension path given!")
@@ -46,8 +46,8 @@ def run(session: DominusCLI, arguments = []):
             if not path.exists(dominusConfigDirPath):
                 printError("Could not access the given Dominus configuration directory path!")
                 return
-            dominusConfig.updateSavedConfigPath(dominusConfigDirPath)
-            dominusConfig.updateConfig({"savedDataDirPath": dominusConfigDirPath})
+            updateSavedConfigPath(dominusConfigDirPath)
+            updateUserConfig({"savedDataDirPath": dominusConfigDirPath})
         else:
             printError("Invalid Dominus configuration directory path given!")
             return

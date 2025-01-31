@@ -61,12 +61,12 @@ def make(session: DominusCLI, config, templatePlaceholders, templatesPath):
 
         if config["type"] == 'file':
             duplicateNameIndex = 0
-            destFileName = makeName
+            destFileName = str(makeName)
             destFilePath = path.join(destination, destFileName + makeExtension)
             
             while path.exists(destFilePath):
                 duplicateNameIndex = duplicateNameIndex + 1
-                destFileName = makeName + duplicateNameIndex
+                destFileName = str(makeName) + str(duplicateNameIndex)
                 destFilePath = path.join(destination, destFileName + makeExtension)
 
             templatePlaceholders['{{generatedFileName}}'] = destFileName
@@ -80,7 +80,7 @@ def make(session: DominusCLI, config, templatePlaceholders, templatesPath):
 
                 if "replaceTemplateString" in config:
                     for replaceWhat, replaceWith in config['replaceTemplateString'].items():
-                        fileContents = fileContents.replace(replaceWhat, replaceWith)
+                        fileContents = fileContents.replace(replaceWhat, parsePlaceholders(replaceWith, templatePlaceholders))
 
                 file.write(fileContents)
         else:
@@ -88,7 +88,6 @@ def make(session: DominusCLI, config, templatePlaceholders, templatesPath):
             makedirs(destination, exist_ok=True)
     
     return destination
-
 
 def process(session: DominusCLI, makeConfigurations, templatePlaceholders, templatesPath):
     for makeConfig in makeConfigurations:

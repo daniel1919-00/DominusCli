@@ -10,7 +10,7 @@ import inquirer
 from theme import getCurrentTheme
 from paths import PATH_CLI_ROOT
 from shutil import rmtree
-import dominusConfig
+from dominusUserConfig import cliDefaultSaveDataDirPath
 
 AnsiColors = Literal[
     'black',
@@ -79,7 +79,7 @@ def getUserName() -> str:
         try:
             username = getlogin()
         except:
-            usernameCache = path.join(dominusConfig.cliDefaultSaveDataDirPath, 'usrname')
+            usernameCache = path.join(cliDefaultSaveDataDirPath, 'usrname')
             if path.exists(usernameCache):
                 return Path(usernameCache).read_text()
 
@@ -120,31 +120,31 @@ def inputColored(prompt: str, foreground: AnsiColors, background: AnsiColors='',
     return input(applyAnsiColor(prompt, foreground, background, bold))
 
 def printInfo(string: str) -> None:
-    printColored(string, getCurrentTheme().printInfoColor, bold=True)
+    printColored(string, getCurrentTheme().get('printInfoColor'), bold=True)
 
 def printOk(string: str) -> None:
-    printColored(string, getCurrentTheme().printOkColor, bold=True)
+    printColored(string, getCurrentTheme().get('printOkColor'), bold=True)
 
 def printWarning(string: str) -> None:
-    printColored(string, getCurrentTheme().printWarningColor, bold=True)
+    printColored(string, getCurrentTheme().get('printWarningColor'), bold=True)
 
 def printError(string: str) -> None:
-    printColored(string, getCurrentTheme().printErrorColor, bold=True)
+    printColored(string, getCurrentTheme().get('printErrorColor'), bold=True)
 
 def printCmdOutput(string: str) -> None:
-    printColored(string, getCurrentTheme().printCmdOutputColor, bold=True)
+    printColored(string, getCurrentTheme().get('printCmdOutputColor'), bold=True)
     
 def promptOk(prompt: str) -> str:
-    return inputColored(prompt, getCurrentTheme().printOkColor)
+    return inputColored(prompt, getCurrentTheme().get('printOkColor'))
 
 def promptError(prompt: str) -> str:
-    return inputColored(prompt, getCurrentTheme().printErrorColor)
+    return inputColored(prompt, getCurrentTheme().get('printErrorColor'))
 
 def promptWarning(prompt: str) -> str:
-    return inputColored(prompt, getCurrentTheme().printWarningColor)
+    return inputColored(prompt, getCurrentTheme().get('printWarningColor'))
 
 def promptInfo(prompt: str) -> str:
-    return inputColored(prompt, getCurrentTheme().printInfoColor)
+    return inputColored(prompt, getCurrentTheme().get('printInfoColor'))
 
 def promptChoice(prompt: str, choices: list):
     answers = inquirer.prompt([

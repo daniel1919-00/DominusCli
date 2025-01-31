@@ -1,27 +1,11 @@
 from common import printCmdOutput, printInfo, promptChoice, printError
 from dominus import DominusCLI
-from theme import currentTheme, getThemesList, currentThemeFilePath, reloadTheme
+from theme import getCurrentTheme, getThemesList, setTheme
 from os import path
-from shutil import copyfile
 from paths import PATH_CLI_THEMES
+from dominusUserConfig import updateUserConfig
 
 def run(session: DominusCLI, arguments = []):
-    if not arguments:
-        arguments.append('list')
-    
-    if 'list' in arguments:
-        themes = getThemesList()
-        printInfo('Available themes:')
-        currentThemeName = currentTheme.name
-        for theme in themes:
-            themeApplied = ''
-            if theme == currentThemeName:
-                themeApplied = '*'
-            
-            printCmdOutput(f'[{themeApplied}] {theme}')
-            print('')
-        return
-
     if 'set' in arguments or 'change' in arguments:
         newThemeName = None
         try:
@@ -30,15 +14,27 @@ def run(session: DominusCLI, arguments = []):
             themes = getThemesList()
             newThemeName = promptChoice("Select a theme", themes)
 
-        if newThemeName == currentTheme.name:
+        if newThemeName == getCurrentTheme().get('name'):
             printInfo('Theme already applied.')
             return
 
         newThemePath = path.join(PATH_CLI_THEMES, newThemeName + '.json')
 
         if not path.exists(newThemePath):
-            printError(f"Theme config not found: {newThemePath}")
+            printError(f"Theme not found: {newThemePath}")
             return
         
-        copyfile(newThemePath, currentThemeFilePath)
-        reloadTheme()
+        setTheme(newThemeName)
+        updateUserConfig({"currentTheme": newThemeName})
+    else:
+        themes = getThemesList()
+        printInfo('Available themes:')
+        currentThemeName = getCurrentTheme().get('name')
+        for theme in themes:
+            themeApplied = ''
+            if theme == currentThemeName:
+                themeApplied = '*'
+            
+            printCmdOutput(f'[{themeApplied}] {theme}')
+            print('')
+        return

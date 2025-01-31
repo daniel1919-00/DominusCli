@@ -5,11 +5,10 @@ from prompt_toolkit.formatted_text import HTML
 from autoCompleter import AutoCompleter
 from os import path, sep as dirSep, getcwd
 from pathlib import Path
-from commands import getCommandDefinition
+from commands import getCommandDefinition, constructCommandAliasMap
 from common import importCommandModule, printWarning, printInfo, runTerminalCommand, applyAnsiColor, getConfigParam
-from theme import reloadTheme, getCurrentTheme
-from paths import PATH_CLI_ROOT
-import dominusConfig
+from theme import getCurrentTheme
+from dominusUserConfig import cliDefaultSaveDataDirPath
 
 class DominusCLI:
     isRunning = False
@@ -28,8 +27,8 @@ class DominusCLI:
             prompter += dirSep + path.basename(currentDir) + ']> '
 
             self.parseInput(prompt(
-                ANSI(applyAnsiColor(prompter, getCurrentTheme().promptColor)),
-                history = FileHistory(path.join(dominusConfig.cliDefaultSaveDataDirPath, 'cmd.hist')),
+                ANSI(applyAnsiColor(prompter, getCurrentTheme().get('promptColor'))),
+                history = FileHistory(path.join(cliDefaultSaveDataDirPath, 'cmd.hist')),
                 auto_suggest = AutoSuggestFromHistory(),
                 completer = AutoCompleter(self),
                 complete_in_thread = True,
@@ -116,10 +115,7 @@ class DominusCLI:
         self.executeCommand(command, arguments)
 
     def start(self):
-        if not dominusConfig.cliConfigurationDone:
-            dominusConfig.setupUserConfiguration()
-            
-        reloadTheme()
+        constructCommandAliasMap()
         self.isRunning = True
         while self.isRunning:
             self.prompt()
