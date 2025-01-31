@@ -34,8 +34,16 @@ def getUserConfig():
     return _configCache
 
 def updateUserConfig(newConfig):
+    _configCache = getUserConfig()
     _configCache.update(newConfig)
-    with open(path.join(_configCache.get('savedDataDirPath'), 'dominus_cli_config.json'), "w") as configFileCache:
+
+    savedDataDirPath = _configCache.get('savedDataDirPath')
+    if path.isabs(savedDataDirPath):
+        configFilePath = savedDataDirPath
+    else:
+        configFilePath = path.join(PATH_CLI_ROOT, savedDataDirPath)
+
+    with open(path.join(configFilePath, 'dominus_cli_config.json'), "w") as configFileCache:
         json.dump(_configCache, configFileCache)
 
 def updateSavedConfigPath(savedDataDirPath):
@@ -47,9 +55,9 @@ def setupUserConfiguration():
     
     print("Preparing dominus cli for first time use, please configure the following:")
     
-    savedDataDirPath = input(f"Please specify the path to where the cli will store and retrieve user saved configurations.\nThis directory can then later be stored in a git repository.\nSaved configurations directory: ").strip()
+    savedDataDirPath = input(f"Please specify the path to where the cli will store and retrieve user saved configurations.\nThis directory can then later be stored in a git repository.\nSaved configurations directory (Non absolute paths are evaluated from the CLI root dir): ").strip()
     if not savedDataDirPath:
-        savedDataDirPath = _configCache.get('savedDataDirPath')
+        savedDataDirPath = _defaultConfiguration.get('savedDataDirPath')
     else:
         if path.exists(path.join(savedDataDirPath, 'dominus_cli_config.json')):
             _configCache = loadConfigFile(savedDataDirPath)
@@ -57,9 +65,9 @@ def setupUserConfiguration():
             print("Loaded existing configuration.")
             return
 
-    appNamespace = input("Please specify the project application namespace, this ensures that any generated boilerplate classes have proper namespace.").strip()
+    appNamespace = input("Please specify the project application namespace, this ensures that any generated boilerplate classes have proper namespace.\n App namespace: ").strip()
     if not appNamespace:
-        appNamespace = _configCache.get('appNamespace')
+        appNamespace = _defaultConfiguration.get('appNamespace')
 
     newConfig = {
         "savedDataDirPath": savedDataDirPath,
