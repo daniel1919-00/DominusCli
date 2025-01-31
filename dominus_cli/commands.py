@@ -1,6 +1,7 @@
 import json
 from os import path
 from paths import PATH_CLI_ROOT
+import dominusConfig
 
 Commands = {}
 MainCommands = []
@@ -11,12 +12,9 @@ with open(path.join(PATH_CLI_ROOT, 'commands.json')) as commandsFile:
     for alias in storedCommands:
         Commands[alias] = storedCommands[alias]
 
-aliasesFilePath = path.join(PATH_CLI_ROOT, 'aliases.json')
-if path.exists(aliasesFilePath):
-    with open(aliasesFilePath) as aliasesFile:
-        existingCommands = json.load(aliasesFile)
-        for alias in existingCommands:
-            Commands[alias] = existingCommands[alias]
+existingCommands = dominusConfig.getConfig().get('existingAliases')
+for alias in existingCommands:
+    Commands[alias] = existingCommands[alias]  
 
 def constructCommandAliasMap():
     del MainCommands[:]

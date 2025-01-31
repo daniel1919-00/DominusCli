@@ -7,5 +7,6 @@
     "allowEmptyName": false,
     "template": "cli-controller.txt",
     "destinationPath": "Controllers",
-    "requiredTemplatePlaceholders": []
+    "requiredTemplatePlaceholders": [],
+    "replaceTemplateString": {}
 }

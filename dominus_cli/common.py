@@ -10,6 +10,7 @@ import inquirer
 from theme import getCurrentTheme
 from paths import PATH_CLI_ROOT
 from shutil import rmtree
+import dominusConfig
 
 AnsiColors = Literal[
     'black',
@@ -78,7 +79,7 @@ def getUserName() -> str:
         try:
             username = getlogin()
         except:
-            usernameCache = path.join(PATH_CLI_ROOT, 'usrname')
+            usernameCache = path.join(dominusConfig.cliDefaultSaveDataDirPath, 'usrname')
             if path.exists(usernameCache):
                 return Path(usernameCache).read_text()
 
@@ -217,4 +218,4 @@ def onrmtreeError(func, path, exc_info):
         raise
 
 def deleteTree(path: str):
-    rmtree(path, onerror=onrmtreeError)
+    rmtree(path, onexc=onrmtreeError)

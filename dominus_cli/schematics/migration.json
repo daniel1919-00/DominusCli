@@ -9,5 +9,6 @@
     "requiredTemplatePlaceholders": [
         "{{moduleName}}",
         "{{currentTimestamp}}"
-    ]
+    ],
+    "replaceTemplateString": {}
 }

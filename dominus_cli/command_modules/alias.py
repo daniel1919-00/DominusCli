@@ -7,16 +7,12 @@ from tabulate import tabulate
 from datetime import datetime
 from dominus import DominusCLI
 from paths import PATH_CLI_ROOT
+import dominusConfig
 
 def run(session: DominusCLI, arguments: List = []):
-    aliasesFilePath = path.join(PATH_CLI_ROOT, 'aliases.json')
-    existingAliases = {}
+    existingAliases = dominusConfig.getConfig().get('existingAliases')
     defaultAliasDesc = True
     newAlias = True
-
-    if path.exists(aliasesFilePath):
-        with open(aliasesFilePath) as aliasesFile:
-            existingAliases = json.load(aliasesFile)
 
     if '--export' in arguments:
         try:
@@ -196,7 +192,6 @@ def run(session: DominusCLI, arguments: List = []):
         printOk(f"Alias '{alias}' has been updated!")
 
     if newAlias: 
-
         if not alias:
             printError("Specify the alias name! Usage: alias <alias name> <options>")
             return
@@ -227,7 +222,6 @@ def run(session: DominusCLI, arguments: List = []):
 
         printOk(f"Alias '{alias}' successfully created!")
 
-    with open(aliasesFilePath, 'w') as aliasesFile:
-        json.dump(existingAliases, aliasesFile)
+    dominusConfig.updateConfig(dominusConfig.getConfig())
     
     constructCommandAliasMap()

@@ -6,5 +6,6 @@
     "nameFirstCharUpper": true,
     "allowEmptyName": false,
     "template": "test.txt",
-    "requiredTemplatePlaceholders": []
+    "requiredTemplatePlaceholders": [],
+    "replaceTemplateString": {}
 }

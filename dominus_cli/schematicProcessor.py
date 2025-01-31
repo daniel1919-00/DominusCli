@@ -78,6 +78,10 @@ def make(session: DominusCLI, config, templatePlaceholders, templatesPath):
                     with open(templateFile) as templateFile:
                         fileContents = parsePlaceholders(templateFile.read(), templatePlaceholders)
 
+                if "replaceTemplateString" in config:
+                    for replaceWhat, replaceWith in config['replaceTemplateString'].items():
+                        fileContents = fileContents.replace(replaceWhat, replaceWith)
+
                 file.write(fileContents)
         else:
             destination = path.join(destination, makeName)

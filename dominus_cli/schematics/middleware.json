@@ -7,5 +7,6 @@
     "allowEmptyName": false,
     "template": "middleware.txt",
     "destinationPath": "Middleware",
-    "requiredTemplatePlaceholders": []
+    "requiredTemplatePlaceholders": [],
+    "replaceTemplateString": {}
 }

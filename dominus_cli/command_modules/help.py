@@ -29,7 +29,8 @@ def printHelpAll():
         formattedCommands.append([
             applyAnsiColor(f'{cmdPadding}{mainCommand}', headerColor, bold=True),
             cmdDef["description"],
-            cmdLen
+            cmdLen,
+            len(f'{cmdPadding}{mainCommand}')
         ])
 
         if cmdArguments:
@@ -45,15 +46,23 @@ def printHelpAll():
                 formattedCommands.append([
                     applyAnsiColor(f'{cmdPadding}{cmdArg}', normalColor, bold=True),
                     cmdArgDef["description"],
-                    cmdArgLen
+                    cmdArgLen,
+                    len(f'{cmdPadding}{cmdArg}')
                 ])
 
     for cmd in formattedCommands:
-        printf(
-            cmd[0]
-            + (' ' * (1 + maxCmdLen - cmd[2]))
-            + cmd[1]
-        )
+        commandDescriptionLines = cmd[1].split(f"\n")
+        commandDescriptionLinePadding = ' ' * (cmd[3] + len((' ' * (1 + maxCmdLen - cmd[2]))))
+
+        for index, descLine in enumerate(commandDescriptionLines):
+            if index == 0:
+                printf(
+                    cmd[0]
+                    + (' ' * (1 + maxCmdLen - cmd[2]))
+                    + descLine
+                )
+            else:
+                printf(commandDescriptionLinePadding + descLine)
 
 def printHelpFor(command: str):
     cmdDef = getCommandDefinition(command)

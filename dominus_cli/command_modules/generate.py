@@ -1,15 +1,16 @@
 from datetime import datetime
 from time import time
 import json
-from os import path, sep as dirSep, linesep, getcwd
+from os import path, sep as dirSep, getcwd
 from typing import Dict, List
 from commands import Commands
 from common import printError, getUserName, parsePlaceholders, getCopyrightText, printOk, getConfigParam
 from schematicProcessor import process
 from dominus import DominusCLI
-from paths import PATH_CLI_ROOT, PATH_DOMINUS_PROJECT_ROOT
+from paths import PATH_CLI_ROOT
 from pathlib import Path
 import re
+from dominusConfig import getConfig
 
 argList = []
 for arg in Commands['generate']['arguments']:
@@ -39,7 +40,8 @@ def run(session: DominusCLI, arguments = []):
     try:
         schematicName = str(arguments[0]).lower()
 
-        schematicFilePath = path.join(PATH_CLI_ROOT, 'schematics', schematicName + '.json')
+        schematicFileName = schematicName + '.json'
+        schematicFilePath = path.join(PATH_CLI_ROOT, 'schematics', schematicFileName)
 
         if not path.exists(schematicFilePath):
             printError(f"Schematic definition not found: {schematicFilePath}!")
@@ -49,6 +51,12 @@ def run(session: DominusCLI, arguments = []):
         with open(schematicFilePath) as schematicFile:
             schematicConfig = json.load(schematicFile)
 
+            templateExtensionPath = getConfig().get('templateExtensionPath')
+            if templateExtensionPath and path.exists(path.join(templateExtensionPath, schematicFileName)):
+                with open(path.join(templateExtensionPath, schematicFileName)) as overriddenSchematicFile:
+                    overriddenSchematicData = json.load(overriddenSchematicFile)
+                    schematicConfig.update(overriddenSchematicData)
+                    
     except IndexError:
         printError(f"Invalid schematic!")
         return
@@ -79,42 +87,19 @@ def run(session: DominusCLI, arguments = []):
             printError(f"A module with the same name exists: {moduleDest}")
             return
         
-    appNamespaceCacheFilePath = path.join(PATH_CLI_ROOT, '.appNamespace')
-    appNamespace = 'App'
-    if not path.exists(appNamespaceCacheFilePath):
-        if PATH_DOMINUS_PROJECT_ROOT == '' or not path.exists(path.join(PATH_DOMINUS_PROJECT_ROOT, '.env')):
-            userSpecifiedNameSpace = input(f"Dominus project application namespace not set! Enter one now, or leave empty to use the default({appNamespace}\\): ").strip().strip('\\')
-            if userSpecifiedNameSpace != '':
-                appNamespace = userSpecifiedNameSpace
-        else:
-            dominusEnvFile = Path(path.join(PATH_DOMINUS_PROJECT_ROOT, '.env')).read_text()
-            match = re.search(r'APP_NAMESPACE="(.*)"', dominusEnvFile)
-
-            if match:
-                extractedString = match.group(1).strip().strip('\\')
-                if extractedString != '':
-                    appNamespace = extractedString
-
-        with open(appNamespaceCacheFilePath, "w") as appNamespaceCacheFile:
-            appNamespaceCacheFile.write(appNamespace)
-    else:
-        appNamespace = Path(appNamespaceCacheFilePath).read_text().strip()
-
     schematicTemplates = path.join(PATH_CLI_ROOT, 'schematics', 'templates')
 
     currentDateTime = datetime.now()
-    currentTimestamp = int(time())
-
     placeholders = {
         '{{sep}}': dirSep,
         '{{cliVersion}}': f'v{getConfigParam("version")}',
         '{{username}}': getUserName(),
         '{{currentDate}}': currentDateTime.strftime("%Y-%m-%d"),
         '{{currentTime}}': currentDateTime.strftime("%H:%M:%S"),
-        '{{currentTimestamp}}': str(currentTimestamp),
+        '{{currentTimestamp}}': str(int(time())),
         '{{generatedItemName}}': generatedItemName,
         '{{moduleName}}': getCurrentModuleName(session),
-        '{{appNamespace}}': appNamespace
+        '{{appNamespace}}': str(getConfig().get('appNamespace'))
     }
 
     copyrightText = getCopyrightText().strip()

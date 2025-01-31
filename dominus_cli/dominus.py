@@ -9,6 +9,7 @@ from commands import getCommandDefinition
 from common import importCommandModule, printWarning, printInfo, runTerminalCommand, applyAnsiColor, getConfigParam
 from theme import reloadTheme, getCurrentTheme
 from paths import PATH_CLI_ROOT
+import dominusConfig
 
 class DominusCLI:
     isRunning = False
@@ -25,10 +26,10 @@ class DominusCLI:
                 prompter += '..' + dirSep + path.basename(parentDir)
 
             prompter += dirSep + path.basename(currentDir) + ']> '
-            
+
             self.parseInput(prompt(
                 ANSI(applyAnsiColor(prompter, getCurrentTheme().promptColor)),
-                history = FileHistory(path.join(PATH_CLI_ROOT, 'cmd.hist')),
+                history = FileHistory(path.join(dominusConfig.cliDefaultSaveDataDirPath, 'cmd.hist')),
                 auto_suggest = AutoSuggestFromHistory(),
                 completer = AutoCompleter(self),
                 complete_in_thread = True,
@@ -115,6 +116,9 @@ class DominusCLI:
         self.executeCommand(command, arguments)
 
     def start(self):
+        if not dominusConfig.cliConfigurationDone:
+            dominusConfig.setupUserConfiguration()
+            
         reloadTheme()
         self.isRunning = True
         while self.isRunning:

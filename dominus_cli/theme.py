@@ -22,6 +22,7 @@ class Theme :
 
     def __init__(self, themeConfig: dict) -> None:
         self.name = themeConfig["name"]
+        self.helpHeaderColor = themeConfig["helpHeaderColor"]
         self.promptColor = themeConfig["promptColor"]
         self.printInfoColor = themeConfig["printInfoColor"]
         self.printOkColor = themeConfig["printOkColor"]
