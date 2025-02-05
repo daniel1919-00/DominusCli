@@ -50,11 +50,11 @@ def run(session: DominusCLI, arguments = []):
         schematicConfig = None
         with open(schematicFilePath) as schematicFile:
             schematicConfig = json.load(schematicFile)
-
-            templateExtensionPath = getUserConfig().get('savedDataDirPath')
-            if path.exists(path.join(templateExtensionPath, 'templates', schematicFileName)):
-                with open(path.join(templateExtensionPath, schematicFileName)) as overriddenSchematicFile:
-                    overriddenSchematicData = json.load(overriddenSchematicFile)
+            savedDataDirPath = getUserConfig().get('savedDataDirPath')
+            schematicOverrideFilePath = path.join(savedDataDirPath, 'templates', schematicFileName)
+            if path.exists(schematicOverrideFilePath):
+                with open(schematicOverrideFilePath) as schematicOverrideFile:
+                    overriddenSchematicData = json.load(schematicOverrideFile)
                     schematicConfig.update(overriddenSchematicData)
                     printInfo(f"Schematic override detected, temporarily applying overridden properties to the base schematic.")
                     
