@@ -4,7 +4,7 @@ import json
 from os import path, sep as dirSep, getcwd
 from typing import Dict, List
 from commands import Commands
-from common import printError, getUserName, parsePlaceholders, getCopyrightText, printOk, getConfigParam, printInfo
+from common import printError, getUserName, parsePlaceholders, getCopyrightText, printOk, getConfigParam, printInfo, getAbsolutePath
 from schematicProcessor import process
 from dominus import DominusCLI
 from paths import PATH_CLI_ROOT
@@ -50,7 +50,7 @@ def run(session: DominusCLI, arguments = []):
         schematicConfig = None
         with open(schematicFilePath) as schematicFile:
             schematicConfig = json.load(schematicFile)
-            savedDataDirPath = getUserConfig().get('savedDataDirPath')
+            savedDataDirPath = getAbsolutePath(getUserConfig().get('savedDataDirPath'))
             schematicOverrideFilePath = path.join(savedDataDirPath, 'templates', schematicFileName)
             if path.exists(schematicOverrideFilePath):
                 with open(schematicOverrideFilePath) as schematicOverrideFile:

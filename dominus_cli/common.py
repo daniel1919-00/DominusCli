@@ -8,9 +8,8 @@ from prompt_toolkit import print_formatted_text, ANSI
 import getpass
 import inquirer
 from theme import getCurrentTheme
-from paths import PATH_CLI_ROOT
+from paths import PATH_CLI_ROOT, PATH_DEFAULT_SAVE_DATA
 from shutil import rmtree
-from dominusUserConfig import cliDefaultSaveDataDirPath
 
 AnsiColors = Literal[
     'black',
@@ -71,6 +70,12 @@ AnsiEscapeSequences = {
     'background_lightcyan': '\033[0;106m'
 }
 
+def getAbsolutePath(p):
+    if path.isabs(p):
+        return p
+    else:
+        return path.join(PATH_CLI_ROOT, p)
+
 def getUserName() -> str:
     username = ''
     try:
@@ -79,7 +84,7 @@ def getUserName() -> str:
         try:
             username = getlogin()
         except:
-            usernameCache = path.join(cliDefaultSaveDataDirPath, 'usrname')
+            usernameCache = path.join(PATH_DEFAULT_SAVE_DATA, 'usrname')
             if path.exists(usernameCache):
                 return Path(usernameCache).read_text()
 

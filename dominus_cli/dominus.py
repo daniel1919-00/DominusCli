@@ -8,7 +8,7 @@ from pathlib import Path
 from commands import getCommandDefinition, constructCommandAliasMap
 from common import importCommandModule, printWarning, printInfo, runTerminalCommand, applyAnsiColor, getConfigParam
 from theme import getCurrentTheme
-from dominusUserConfig import cliDefaultSaveDataDirPath
+from paths import PATH_DEFAULT_SAVE_DATA
 
 class DominusCLI:
     isRunning = False
@@ -28,7 +28,7 @@ class DominusCLI:
 
             self.parseInput(prompt(
                 ANSI(applyAnsiColor(prompter, getCurrentTheme().get('promptColor'))),
-                history = FileHistory(path.join(cliDefaultSaveDataDirPath, 'cmd.hist')),
+                history = FileHistory(path.join(PATH_DEFAULT_SAVE_DATA, 'cmd.hist')),
                 auto_suggest = AutoSuggestFromHistory(),
                 completer = AutoCompleter(self),
                 complete_in_thread = True,

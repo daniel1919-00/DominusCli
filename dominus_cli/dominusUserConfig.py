@@ -1,13 +1,13 @@
 import json
 from os import path, mkdir
-from paths import PATH_CLI_ROOT
+from paths import PATH_CLI_ROOT, PATH_DEFAULT_SAVE_DATA
 from pathlib import Path
+from common import getAbsolutePath
 
-cliDefaultSaveDataDirPath = path.join(PATH_CLI_ROOT, 'savedData')
-_savedConfigPathFilePath = path.join(cliDefaultSaveDataDirPath, '.savedConfigPath')
+_savedConfigPathFilePath = path.join(PATH_DEFAULT_SAVE_DATA, '.savedConfigPath')
 cliConfigurationDone = path.exists(_savedConfigPathFilePath)
 _defaultConfiguration = {
-    "savedDataDirPath": cliDefaultSaveDataDirPath, 
+    "savedDataDirPath": PATH_DEFAULT_SAVE_DATA, 
     "existingAliases": {},
     "appNamespace": "App",
     "currentTheme": "default"
@@ -15,11 +15,7 @@ _defaultConfiguration = {
 _configCache = None
 
 def getConfigFilePath(savedDataDirPath):
-    if path.isabs(savedDataDirPath):
-        configFilePath = savedDataDirPath
-    else:
-        configFilePath = path.join(PATH_CLI_ROOT, savedDataDirPath)
-    
+    configFilePath = getAbsolutePath(savedDataDirPath)
     return path.join(configFilePath, 'dominus_cli_config.json')
 
 def loadConfigFile(configFilePath):
@@ -37,7 +33,7 @@ def getUserConfig():
     global _configCache
 
     if not _configCache:
-        _configCache = loadConfigFile(cliDefaultSaveDataDirPath)
+        _configCache = loadConfigFile(PATH_DEFAULT_SAVE_DATA)
 
     return _configCache
 
