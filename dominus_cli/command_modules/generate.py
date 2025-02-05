@@ -4,7 +4,7 @@ import json
 from os import path, sep as dirSep, getcwd
 from typing import Dict, List
 from commands import Commands
-from common import printError, getUserName, parsePlaceholders, getCopyrightText, printOk, getConfigParam
+from common import printError, getUserName, parsePlaceholders, getCopyrightText, printOk, getConfigParam, printInfo
 from schematicProcessor import process
 from dominus import DominusCLI
 from paths import PATH_CLI_ROOT
@@ -56,6 +56,7 @@ def run(session: DominusCLI, arguments = []):
                 with open(path.join(templateExtensionPath, schematicFileName)) as overriddenSchematicFile:
                     overriddenSchematicData = json.load(overriddenSchematicFile)
                     schematicConfig.update(overriddenSchematicData)
+                    printInfo(f"Schematic override detected, temporarily applying overridden properties to the base schematic.")
                     
         if not schematicConfig:
             printError(f"Invalid schematic!")
