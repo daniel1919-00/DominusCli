@@ -10,7 +10,7 @@ from dominus import DominusCLI
 from paths import PATH_CLI_ROOT
 from pathlib import Path
 import re
-from dominusUserConfig import getUserConfig
+from dominusUserConfig import getSavedDataDirPath, getUserConfig
 
 argList = []
 for arg in Commands['generate']['arguments']:
@@ -50,8 +50,7 @@ def run(session: DominusCLI, arguments = []):
         schematicConfig = None
         with open(schematicFilePath) as schematicFile:
             schematicConfig = json.load(schematicFile)
-            savedDataDirPath = getAbsolutePath(getUserConfig().get('savedDataDirPath'))
-            schematicOverrideFilePath = path.join(savedDataDirPath, 'templates', schematicFileName)
+            schematicOverrideFilePath = path.join(getSavedDataDirPath(), 'templates', schematicFileName)
             if path.exists(schematicOverrideFilePath):
                 with open(schematicOverrideFilePath) as schematicOverrideFile:
                     overriddenSchematicData = json.load(schematicOverrideFile)
