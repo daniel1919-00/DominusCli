@@ -1,5 +1,5 @@
 import json
-from os import path
+from os import path, mkdir
 from paths import PATH_CLI_ROOT
 from pathlib import Path
 
@@ -75,6 +75,8 @@ def setupUserConfiguration():
         "savedDataDirPath": savedDataDirPath,
         "appNamespace": appNamespace
     }
+
+    mkdir(path.join(savedDataDirPath, 'templates'))
 
     print(f"The following configuration will be saved to the specified Saved configurations directory: {savedDataDirPath}")
     print(newConfig)

@@ -187,10 +187,6 @@
                 "description": "Sets the namespace used by the generate commands to generate boilerplate code. Usage: set namespace <namespace>"
             },
             {
-                "argument": "template-extension-path",
-                "description": "Sets the path to the directory containing schematic template extensions.\nThe directory should contain .json files overriding the properties of the corresponding original .json files in the cli <Dominus cli root dir>/schematics.\nUsage: set template-extension-path <extensions-dir-path>"
-            },
-            {
                 "argument": "dominus-config-dir",
                 "description": "Sets the path to the directory containing Dominus saved files.\nUsage: set dominus-config-dir <config-dir-path>"
             }

@@ -51,14 +51,17 @@ def run(session: DominusCLI, arguments = []):
         with open(schematicFilePath) as schematicFile:
             schematicConfig = json.load(schematicFile)
 
-            templateExtensionPath = getUserConfig().get('templateExtensionPath')
-            if templateExtensionPath and path.exists(path.join(templateExtensionPath, schematicFileName)):
+            templateExtensionPath = getUserConfig().get('savedDataDirPath')
+            if path.exists(path.join(templateExtensionPath, 'templates', schematicFileName)):
                 with open(path.join(templateExtensionPath, schematicFileName)) as overriddenSchematicFile:
                     overriddenSchematicData = json.load(overriddenSchematicFile)
                     schematicConfig.update(overriddenSchematicData)
                     
-    except IndexError:
-        printError(f"Invalid schematic!")
+        if not schematicConfig:
+            printError(f"Invalid schematic!")
+            return    
+    except Exception as e:
+        printError(f"Invalid schematic! Exception: ${str(e)}")
         return
 
     try:

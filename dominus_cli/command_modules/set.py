@@ -27,18 +27,6 @@ def run(session: DominusCLI, arguments = []):
         updateUserConfig({"appNamespace": appNamespace})
         printOk(f"New application namespace set: {appNamespace}")
         return
-    elif setConfiguration == 'template-extension-path':
-        if setConfigurationValue != '':
-            templateExtensionPath = setConfigurationValue
-            if not path.exists(templateExtensionPath):
-                printError("Could not access the given templates extension path!")
-                return
-            
-            updateUserConfig({"templateExtensionPath": templateExtensionPath})
-            printOk(f"Templates will be extended using .json files found in this path: {templateExtensionPath}")
-        else:
-            printError("Invalid template extension path given!")
-            return
         
     elif setConfiguration == 'dominus-config-dir':
         if setConfigurationValue != '':
