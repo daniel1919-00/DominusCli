@@ -30,6 +30,8 @@ def getUserConfig():
                     savedConfig = json.load(savedConfigFile)
                     config = {**_defaultConfiguration, **savedConfig}
                     return config
+            else:
+                return _defaultConfiguration
         else:
             return _defaultConfiguration
 
